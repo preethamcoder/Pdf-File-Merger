@@ -7,8 +7,6 @@ def extract_files(dir_name):
     res = os.listdir(dir_name)
     # Filter out all the pdf files
     res = [dir_name+"/"+each for each in res if each[-3:] == "pdf"]
-    # # Sort all the files in order
-    # res.sort(key= lambda x: int(x.split("/")[-1].split("-")[0][3:]))
     # Declare stack for push and pop operations
     stck = []
     # Put number files at the end
