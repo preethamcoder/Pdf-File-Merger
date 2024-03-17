@@ -7,22 +7,24 @@ def extract_files(dir_name):
     res = os.listdir(dir_name)
     # Filter out all the pdf files
     res = [dir_name+"/"+each for each in res if each[-3:] == "pdf"]
-    # Sort all the files in order
-    res.sort()
+    # # Sort all the files in order
+    # res.sort(key= lambda x: int(x.split("/")[-1].split("-")[0][3:]))
     # Declare stack for push and pop operations
     stck = []
     # Put number files at the end
     for file in res:
         # Get the file names that start with the numbers
         words = file.split("/")
-        # Check for the common prefix, was "ORG" in my case
-        if words[-1][:3] != 'ORG':
+        if words[-1][:3].lower() == 'org':
             stck.append(file)
-    # Remove the files
+    # Filter out the numeric files
     res = [each for each in res if each not in stck]
-    # Add file at the end
-    for file in stck:
-        res.append(file)
+    # Sort the files that start with ORG based on their number
+    stck.sort(key= lambda x: int(x.split("/")[-1].split("-")[0][3:]))
+    # Sort the files that dont have ORG
+    res.sort()
+    # Combine both the files lists together
+    res = stck + res
     # Return sorted list
     return res
 
