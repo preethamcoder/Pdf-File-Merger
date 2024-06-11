@@ -31,7 +31,8 @@ def merge_files(file_list):
     merger = PyPDF2.PdfWriter()
     # Append each file to the writer
     for pdf in file_list:
-        merger.append(pdf)
+        with open(pdf, 'rb') as file:
+            merger.append(file)
     # Declare end path
     res_name = "resultant.pdf"
     # Write the file to the path
