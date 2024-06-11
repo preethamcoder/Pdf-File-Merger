@@ -30,8 +30,11 @@ def merge_files(file_list):
     # Get a writer to combine the texts
     merger = PyPDF2.PdfWriter()
     # Append each file to the writer
+    cter = 0
     for pdf in file_list:
+        cter += 1
         with open(pdf, 'rb') as file:
+            print(pdf)
             merger.append(file)
     # Declare end path
     res_name = "resultant.pdf"
